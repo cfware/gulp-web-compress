@@ -3,7 +3,6 @@ import path from 'path';
 import test from 'ava';
 import concat from 'concat-stream';
 import gulp from 'gulp';
-import hasha from 'hasha';
 import pipeline from 'stream.pipeline-shim';
 
 import gulpWebCompress from '..';
@@ -68,7 +67,6 @@ test('gzip allow larger', async t => {
 	t.true(Array.isArray(data));
 	t.is(data.length, 1);
 	t.is(data[0].relative, 'index.js.gz');
-	t.snapshot(hasha(data[0].contents), data[0].relative);
 });
 
 test('brotli allow larger', async t => {
@@ -77,17 +75,11 @@ test('brotli allow larger', async t => {
 	t.true(Array.isArray(data));
 	t.is(data.length, 1);
 	t.is(data[0].relative, 'index.js.br');
-	t.snapshot(hasha(data[0].contents), data[0].relative);
 });
 
 test('both allow larger', async t => {
-	let data = await runGulp('index.js', undefined, {skipLarger: false});
+	const data = await runGulp('index.js', undefined, {skipLarger: false});
 
 	t.true(Array.isArray(data));
-	t.is(data.length, 2);
-	data = data.sort((a, b) => a.relative.localeCompare(b.relative));
-	t.deepEqual(data.map(f => f.relative), ['index.js.br', 'index.js.gz']);
-	data.forEach(f => {
-		t.snapshot(hasha(f.contents), f.relative);
-	});
+	t.deepEqual(data.map(f => f.relative).sort(), ['index.js.br', 'index.js.gz']);
 });
