@@ -31,7 +31,6 @@
 	},
 	"homepage": "https://github.com/cfware/gulp-web-compress#readme",
 	"dependencies": {
-		"arrify": "^1.0.1",
 		"branch-pipe": "^1.0.1",
 		"gulp-brotli": "^1.2.1",
 		"gulp-clone": "^2.0.1",

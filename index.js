@@ -2,7 +2,6 @@
 
 const pipeline = require('stream.pipeline-shim');
 
-const arrify = require('arrify');
 const branch = require('branch-pipe');
 const brotli = require('gulp-brotli');
 const clone = require('gulp-clone');
@@ -30,22 +29,23 @@ const handleTypes = {
 };
 
 const defaultOptions = {
+	types: ['gz', 'br'],
 	skipLarger: true,
 	gzipOptions: {},
 	brotliOptions: {}
 };
 
-function gulpWebCompress(types = ['gz', 'br'], options = {}) {
-	types = arrify(types);
-	if (types.length === 0) {
+function gulpWebCompress(options = {}) {
+	options = Object.assign({}, defaultOptions, options);
+	if (options.types.length === 0) {
 		return filter('!**');
 	}
 
-	if (types.length > new Set(types).size) {
+	if (options.types.length > new Set(options.types).size) {
 		throw new Error('Duplicate compression type provided');
 	}
 
-	const fns = types.map(type => {
+	const fns = options.types.map(type => {
 		const fn = handleTypes[type];
 		if (!fn) {
 			throw new Error(`Unknown compression type: '${type}'`);
@@ -54,7 +54,6 @@ function gulpWebCompress(types = ['gz', 'br'], options = {}) {
 		return fn;
 	});
 
-	options = Object.assign({}, defaultOptions, options);
 	return branch.obj(src => fns.map(fn => fn(src, options)));
 }
 

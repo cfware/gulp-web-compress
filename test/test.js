@@ -14,18 +14,18 @@ test('exports function', t => {
 });
 
 test('throws on invalid arguments', t => {
-	t.throws(() => gulpWebCompress(true), 'Unknown compression type: \'true\'');
-	t.throws(() => gulpWebCompress('invalid'), 'Unknown compression type: \'invalid\'');
-	t.throws(() => gulpWebCompress(['br', 'br']), 'Duplicate compression type provided');
+	t.throws(() => gulpWebCompress({types: true}), TypeError);
+	t.throws(() => gulpWebCompress({types: ['invalid']}), 'Unknown compression type: \'invalid\'');
+	t.throws(() => gulpWebCompress({types: ['br', 'br']}), 'Duplicate compression type provided');
 });
 
-function runGulp(file, ...args) {
+function runGulp(file, options) {
 	return new Promise((resolve, reject) => {
 		let data = null;
 
 		pipeline(
 			gulp.src(path.join(fixtures, file), {base: fixtures, nodir: true}),
-			gulpWebCompress(...args),
+			gulpWebCompress(options),
 			concat(objs => {
 				data = objs;
 			}),
@@ -41,28 +41,35 @@ function runGulp(file, ...args) {
 }
 
 test('do nothing', async t => {
-	const data = await runGulp('index.js', []);
+	const data = await runGulp('index.js', {types: []});
 
 	t.true(Array.isArray(data));
 	t.is(data.length, 0);
 });
 
 test('gzip skip larger', async t => {
-	const data = await runGulp('index.js', 'gz');
+	const data = await runGulp('index.js', {types: ['gz']});
 
 	t.true(Array.isArray(data));
 	t.is(data.length, 0);
 });
 
 test('brotli skip larger', async t => {
-	const data = await runGulp('index.js', 'br');
+	const data = await runGulp('index.js', {types: ['br']});
+
+	t.true(Array.isArray(data));
+	t.is(data.length, 0);
+});
+
+test('both skip larger', async t => {
+	const data = await runGulp('index.js');
 
 	t.true(Array.isArray(data));
 	t.is(data.length, 0);
 });
 
 test('gzip allow larger', async t => {
-	const data = await runGulp('index.js', 'gz', {skipLarger: false});
+	const data = await runGulp('index.js', {types: ['gz'], skipLarger: false});
 
 	t.true(Array.isArray(data));
 	t.is(data.length, 1);
@@ -70,7 +77,7 @@ test('gzip allow larger', async t => {
 });
 
 test('brotli allow larger', async t => {
-	const data = await runGulp('index.js', 'br', {skipLarger: false});
+	const data = await runGulp('index.js', {types: ['br'], skipLarger: false});
 
 	t.true(Array.isArray(data));
 	t.is(data.length, 1);
@@ -78,7 +85,7 @@ test('brotli allow larger', async t => {
 });
 
 test('both allow larger', async t => {
-	const data = await runGulp('index.js', undefined, {skipLarger: false});
+	const data = await runGulp('index.js', {skipLarger: false});
 
 	t.true(Array.isArray(data));
 	t.deepEqual(data.map(f => f.relative).sort(), ['index.js.br', 'index.js.gz']);

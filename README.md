@@ -21,12 +21,13 @@ npm i -D gulp-web-compress
 ```js
 'use strict';
 
+const pipeline = require('stream.pipeline-shim');
 const gulp = require('gulp');
 const gulpWebCompress = require('gulp-web-compress');
 
 gulp.task('default', () => pipeline(
 	gulp.src('src/**'),
-	/* perform translations */
+	/* perform build steps */
 	gulp.dest('dest', {sourceMaps: '.'}),
 	gulpWebCompress(),
 	gulp.dest('dest'),
@@ -44,9 +45,9 @@ files (including source-maps) are then passed to `gulpWebCompress` which produce
 `*.gz` and `*.br` files.  Only compressed files reach the second call to `gulp.dest`.
 
 
-## gulpCompress(types, options)
+## gulpCompress(options)
 
-### types
+### options.types
 
 An array of zero or more strings can be provided.
 
