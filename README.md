@@ -66,8 +66,8 @@ Default `true`
 See node.js [zlib options] documentation.  Example:
 
 ```js
-gulpCompress('gz', {
-	skipLarger: true,
+gulpCompress({
+	types: ['gz'],
 	gzipOptions: {
 		level: 9
 	}
@@ -79,8 +79,8 @@ gulpCompress('gz', {
 See [brotliEncodeParams] documentation.  Example:
 
 ```js
-gulpCompress('gz', {
-	skipLarger: true,
+gulpCompress({
+	types: ['br'],
 	brotliOptions: {
 		mode: 0,
 		quality: 11
