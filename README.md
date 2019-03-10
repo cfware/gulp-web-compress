@@ -10,7 +10,7 @@ A gulp plugin to optionally compress output with gzip and brotli.
 
 ### Install gulp-web-compress
 
-This module requires node.js 8 or above.
+This module requires node.js 6 or above.
 
 ```sh
 npm i -D gulp-web-compress
