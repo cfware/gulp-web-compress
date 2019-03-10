@@ -10,21 +10,32 @@ const filter = require('gulp-filter');
 const gzip = require('gulp-gzip');
 
 function compressFn(ext, compressor) {
-	return (src, skipLarger) => pipeline(
+	return (src, options) => pipeline(
 		src,
 		clone(),
-		compressor(skipLarger),
+		compressor(options),
 		filter(ext),
 		() => {}
 	);
 }
 
 const handleTypes = {
-	br: compressFn('**/*.br', skipLarger => brotli.compress({skipLarger})),
-	gz: compressFn('**/*.gz', skipGrowingFiles => gzip({skipGrowingFiles}))
+	br: compressFn('**/*.br', ({skipLarger, brotliOptions}) => {
+		const options = Object.assign({skipLarger}, brotliOptions, {extension: 'br'});
+		return brotli.compress(options);
+	}),
+	gz: compressFn('**/*.gz', ({skipLarger, gzipOptions}) => {
+		return gzip({skipGrowingFiles: skipLarger, gzipOptions});
+	})
 };
 
-function gulpWebCompress(types = ['gz', 'br'], opts = {}) {
+const defaultOptions = {
+	skipLarger: true,
+	gzipOptions: {},
+	brotliOptions: {}
+};
+
+function gulpWebCompress(types = ['gz', 'br'], options = {}) {
 	types = arrify(types);
 	if (types.length === 0) {
 		return filter('!**');
@@ -43,8 +54,8 @@ function gulpWebCompress(types = ['gz', 'br'], opts = {}) {
 		return fn;
 	});
 
-	opts = Object.assign({skipLarger: true}, opts);
-	return branch.obj(src => fns.map(fn => fn(src, opts.skipLarger)));
+	options = Object.assign({}, defaultOptions, options);
+	return branch.obj(src => fns.map(fn => fn(src, options)));
 }
 
 module.exports = gulpWebCompress;

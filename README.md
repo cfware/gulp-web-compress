@@ -52,12 +52,40 @@ An array of zero or more strings can be provided.
 
 Default `['br', 'gz]`
 
+Valid types are `br` for brotli compression, `gz` for gzip compression.
+
 ### options.skipLarger
 
 This prevents creation of compressed files that are larger than the uncompressed files.
 
 Default `true`
 
+### options.gzipOptions
+
+See node.js [zlib options] documentation.  Example:
+
+```js
+gulpCompress('gz', {
+	skipLarger: true,
+	gzipOptions: {
+		level: 9
+	}
+})
+```
+
+### options.brotliOptions
+
+See [brotliEncodeParams] documentation.  Example:
+
+```js
+gulpCompress('gz', {
+	skipLarger: true,
+	brotliOptions: {
+		mode: 0,
+		quality: 11
+	}
+})
+```
 
 ## Running tests
 
@@ -76,3 +104,5 @@ npm test
 [downloads-image]: https://img.shields.io/npm/dm/gulp-web-compress.svg
 [downloads-url]: https://npmjs.org/package/gulp-web-compress
 [license-image]: https://img.shields.io/npm/l/gulp-web-compress.svg
+[zlib options]: https://nodejs.org/api/zlib.html#zlib_class_options
+[brotliEncodeParams]: https://github.com/MayhemYDG/iltorb#brotliencodeparams
