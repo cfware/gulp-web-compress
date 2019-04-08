@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.1](https://github.com/cfware/gulp-web-compress/compare/v0.2.0...v0.2.1) (2019-04-08)
+
+
+### Bug Fixes
+
+* Drop gulp-filter and gulp-clone dependencies. ([a56d5fb](https://github.com/cfware/gulp-web-compress/commit/a56d5fb))
+
+
+
 # [0.2.0](https://github.com/cfware/gulp-web-compress/compare/v0.1.0...v0.2.0) (2019-03-10)
 
 
