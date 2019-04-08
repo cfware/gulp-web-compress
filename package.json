@@ -33,8 +33,6 @@
 	"dependencies": {
 		"branch-pipe": "^1.0.1",
 		"gulp-brotli": "^1.2.1",
-		"gulp-clone": "^2.0.1",
-		"gulp-filter": "^5.1.0",
 		"gulp-gzip": "^1.4.2",
 		"stream.pipeline-shim": "^1.0.4"
 	},
