@@ -7,7 +7,7 @@ import pipeline from 'stream.pipeline-shim';
 
 import gulpWebCompress from '..';
 
-const fixtures = path.join(__dirname, 'fixtures');
+const fixtures = path.join(__dirname, '..', 'fixtures');
 
 test('exports function', t => {
 	t.is(typeof gulpWebCompress, 'function');
