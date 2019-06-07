@@ -42,8 +42,11 @@ function compressFn(ext, compressor) {
 
 const handleTypes = {
 	br: compressFn('.br', ({skipLarger, brotliOptions}) => {
-		const options = Object.assign({skipLarger}, brotliOptions, {extension: 'br'});
-		return brotli.compress(options);
+		return brotli.compress({
+			skipLarger,
+			...brotliOptions,
+			extension: 'br'
+		});
 	}),
 	gz: compressFn('.gz', ({skipLarger, gzipOptions}) => {
 		return gzip({skipGrowingFiles: skipLarger, gzipOptions});
@@ -58,7 +61,10 @@ const defaultOptions = {
 };
 
 function gulpWebCompress(options = {}) {
-	options = Object.assign({}, defaultOptions, options);
+	options = {
+		...defaultOptions,
+		...options
+	};
 	if (options.types.length === 0) {
 		return filter();
 	}
