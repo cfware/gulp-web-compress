@@ -1,6 +1,20 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [0.3.0](https://github.com/cfware/gulp-web-compress/compare/v0.2.1...v0.3.0) (2019-06-07)
+
+
+### Bug Fixes
+
+* Node.js 8 is now required ([bbd800e](https://github.com/cfware/gulp-web-compress/commit/bbd800e))
+
+
+### BREAKING CHANGES
+
+* Node.js 8 is now required
+
+
 
 ## [0.2.1](https://github.com/cfware/gulp-web-compress/compare/v0.2.0...v0.2.1) (2019-04-08)
 

@@ -1,6 +1,6 @@
 {
 	"name": "gulp-web-compress",
-	"version": "0.2.1",
+	"version": "0.3.0",
 	"description": "A gulp plugin to optionally compress output with gzip and brotli",
 	"scripts": {
 		"release": "standard-version --sign",
