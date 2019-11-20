@@ -28,7 +28,7 @@
 	"homepage": "https://github.com/cfware/gulp-web-compress#readme",
 	"dependencies": {
 		"branch-pipe": "^1.0.1",
-		"gulp-brotli": "^1.2.2",
+		"gulp-brotli": "^2.0.0",
 		"gulp-gzip": "^1.4.2",
 		"stream.pipeline-shim": "^1.1.0"
 	},
