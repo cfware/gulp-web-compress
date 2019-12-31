@@ -33,11 +33,11 @@
 		"stream.pipeline-shim": "^1.1.0"
 	},
 	"devDependencies": {
-		"@cfware/nyc": "^0.5.0",
+		"@cfware/nyc": "^0.6.0",
 		"ava": "^2.0.0",
 		"concat-stream": "^2.0.0",
 		"gulp": "^4.0.2",
-		"nyc": "^14.1.1",
+		"nyc": "^15.0.0",
 		"standard-version": "^7.0.0",
 		"xo": "^0.25.3"
 	}
