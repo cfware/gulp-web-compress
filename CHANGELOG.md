@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/cfware/gulp-web-compress/compare/v0.3.0...v0.4.0) (2020-02-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* node.js 13.8.0 is the earliest supported version
+
+### Features
+
+* Update to provide ES module ([5bad37c](https://github.com/cfware/gulp-web-compress/commit/5bad37c4a35505d852ebea8c4a10a4322368704a))
+
 ## [0.3.0](https://github.com/cfware/gulp-web-compress/compare/v0.2.1...v0.3.0) (2019-06-07)
 
 
