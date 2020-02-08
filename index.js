@@ -1,41 +1,38 @@
-'use strict';
+import {pipeline, Transform} from 'stream';
 
-const {Transform} = require('stream');
-
-const pipeline = require('stream.pipeline-shim');
-const branch = require('branch-pipe');
-const brotli = require('gulp-brotli');
-const gzip = require('gulp-gzip');
+import branch from 'branch-pipe';
+import brotli from 'gulp-brotli';
+import gzip from 'gulp-gzip';
 
 function clone() {
 	return new Transform({
 		objectMode: true,
-		transform(file, enc, cb) {
-			cb(null, file.clone());
+		transform(file, encoding, callback) {
+			callback(null, file.clone());
 		}
 	});
 }
 
-function filter(ext) {
+function filter(extension) {
 	return new Transform({
 		objectMode: true,
-		transform(file, enc, cb) {
+		transform(file, encoding, callback) {
 			const args = [null];
-			if (file.extname === ext) {
+			if (file.extname === extension) {
 				args.push(file);
 			}
 
-			cb(...args);
+			callback(...args);
 		}
 	});
 }
 
-function compressFn(ext, compressor) {
-	return (src, options) => pipeline(
-		src,
+function compressFn(extension, compressor) {
+	return (source, options) => pipeline(
+		source,
 		clone(),
 		compressor(options),
-		filter(ext),
+		filter(extension),
 		() => {}
 	);
 }
@@ -60,7 +57,7 @@ const defaultOptions = {
 	brotliOptions: {}
 };
 
-function gulpWebCompress(options = {}) {
+export default function gulpWebCompress(options = {}) {
 	options = {
 		...defaultOptions,
 		...options
@@ -82,7 +79,5 @@ function gulpWebCompress(options = {}) {
 		return fn;
 	});
 
-	return branch.obj(src => fns.map(fn => fn(src, options)));
+	return branch.obj(source => fns.map(fn => fn(source, options)));
 }
-
-module.exports = gulpWebCompress;
