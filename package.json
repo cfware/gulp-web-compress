@@ -39,7 +39,7 @@
 		"c8": "^7.0.1",
 		"concat-stream": "^2.0.0",
 		"libtap": "^0.3.0",
-		"standard-version": "^7.0.0",
+		"standard-version": "^8.0.0",
 		"vinyl-fs": "^3.0.3"
 	}
 }
