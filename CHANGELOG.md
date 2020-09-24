@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.1](https://github.com/cfware/gulp-web-compress/compare/v0.4.0...v0.4.1) (2020-09-24)
+
+
+### Features
+
+* Upgrade dependencies ([928d268](https://github.com/cfware/gulp-web-compress/commit/928d268893a8557d21ccc7678f210fa2330e1727))
+
 ## [0.4.0](https://github.com/cfware/gulp-web-compress/compare/v0.3.0...v0.4.0) (2020-02-08)
 
 
