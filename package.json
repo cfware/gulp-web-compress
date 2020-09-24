@@ -5,12 +5,13 @@
 	"type": "module",
 	"exports": "./index.js",
 	"scripts": {
-		"release": "standard-version --sign",
 		"pretest": "cfware-lint .",
-		"test": "c8 node test.js"
+		"tests-only": "nyc -r none node --experimental-loader=@istanbuljs/esm-loader-hook test.js",
+		"test": "npm run -s tests-only",
+		"posttest": "nyc report"
 	},
 	"engines": {
-		"node": ">=13.8.0"
+		"node": ">=14.0.0"
 	},
 	"author": "Corey Farrell",
 	"license": "MIT",
@@ -31,15 +32,16 @@
 	"homepage": "https://github.com/cfware/gulp-web-compress#readme",
 	"dependencies": {
 		"branch-pipe": "^1.0.1",
-		"gulp-brotli": "^2.0.2",
+		"gulp-brotli": "^3.0.0",
 		"gulp-gzip": "^1.4.2"
 	},
 	"devDependencies": {
-		"@cfware/lint": "^1.1.2",
-		"c8": "^7.0.1",
+		"@cfware/lint": "^2.0.2",
+		"@cfware/nyc": "^0.7.0",
+		"@istanbuljs/esm-loader-hook": "^0.1.2",
 		"concat-stream": "^2.0.0",
 		"libtap": "^0.3.0",
-		"standard-version": "^8.0.0",
+		"nyc": "^15.1.0",
 		"vinyl-fs": "^3.0.3"
 	}
 }

@@ -7,7 +7,6 @@ import t from 'libtap';
 import concat from 'concat-stream';
 import vinylFS from 'vinyl-fs';
 
-// eslint-disable-next-line import/no-unresolved
 import gulpWebCompress from 'gulp-web-compress';
 
 const pipeline = promisify(stream.pipeline);

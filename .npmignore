@@ -1,6 +1,6 @@
 *.tgz
 coverage
-package
-.travis.yml
+.github
+nyc.config.js
 fixtures
 test.js

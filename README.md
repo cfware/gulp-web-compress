@@ -1,29 +1,13 @@
-# gulp-web-compress
-
-[![Travis CI][travis-image]][travis-url]
-[![Greenkeeper badge][gk-image]](https://greenkeeper.io/)
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
-[![MIT][license-image]](LICENSE)
+# gulp-web-compress [![NPM Version][npm-image]][npm-url]
 
 A gulp plugin to optionally compress output with gzip and brotli.
-
-### Install gulp-web-compress
-
-This module requires node.js 6 or above.
-
-```sh
-npm i -D gulp-web-compress
-```
 
 ## Usage
 
 ```js
-'use strict';
-
-const pipeline = require('stream.pipeline-shim');
-const gulp = require('gulp');
-const gulpWebCompress = require('gulp-web-compress');
+import {pipeline} from 'stream';
+import gulp from 'gulp';
+import gulpWebCompress from 'gulp-web-compress';
 
 gulp.task('default', () => pipeline(
 	gulp.src('src/**'),
@@ -88,22 +72,7 @@ gulpCompress({
 })
 ```
 
-## Running tests
-
-Tests are provided by xo and ava.
-
-```sh
-npm install
-npm test
-```
-
 [npm-image]: https://img.shields.io/npm/v/gulp-web-compress.svg
 [npm-url]: https://npmjs.org/package/gulp-web-compress
-[travis-image]: https://travis-ci.org/cfware/gulp-web-compress.svg?branch=master
-[travis-url]: https://travis-ci.org/cfware/gulp-web-compress
-[gk-image]: https://badges.greenkeeper.io/cfware/gulp-web-compress.svg
-[downloads-image]: https://img.shields.io/npm/dm/gulp-web-compress.svg
-[downloads-url]: https://npmjs.org/package/gulp-web-compress
-[license-image]: https://img.shields.io/npm/l/gulp-web-compress.svg
 [zlib options]: https://nodejs.org/api/zlib.html#zlib_class_options
 [brotliEncodeParams]: https://github.com/MayhemYDG/iltorb#brotliencodeparams
